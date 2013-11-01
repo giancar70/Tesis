@@ -1,0 +1,107 @@
+﻿@model Cafeteria.Models.Compra.Proveedor.ProveedorxIngredienteBean
+@{
+    ViewBag.Title = "Listado";
+}
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+ @using (Html.BeginForm("ModificarIngredientes", "Proveedor", FormMethod.Post, new { @class = "form" }))
+ {   
+     @Html.HiddenFor(model => model.idProveedor) @Html.HiddenFor(model => model.nombreProveedor) 
+    <fieldset>
+        <div class="widget">
+            <div class="title">
+                <h6>Proveedor</h6>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.idProveedor)
+                <div class=" formRight">  @Html.DisplayFor(model => model.idProveedor)  </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProveedor)
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombreProveedor)  </div>
+                <div class="clear"></div>
+            </div>
+            
+             @for (int i = 0; i < Model.listadeIngredientesProveedor.Count; i++)
+             {
+                    @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].id)  
+             }
+        </div>
+    </fieldset>
+    
+
+    <p></p><p></p>
+
+    <div class="title"><h6>Ingredientes que tiene el Proveedor</h6> </div>
+        
+     <p>
+    <a href="@Url.Action("AñadirIngredientes", new { ID = Model.idProveedor })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Ingredientes</a>
+    </p>
+        
+         
+     <div class="wrapper">
+    <div class="widget">
+      <div class="title">
+      <h6>Lista de Ingredientes</h6>
+      </div>
+      <div class="dataTables_wrapper">
+            
+            <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+    <thead>
+        <tr>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                <div class="DataTables_sort_wrapper">
+                ID
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                <div class="DataTables_sort_wrapper">
+                Nombre
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                <div class="DataTables_sort_wrapper">
+                Precio
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @for (int i = 0; i < Model.listadeIngredientesProveedor.Count; i++)
+    {
+         @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].id) 
+        <tr class="gradeA odd">
+            <td class="sorting_1">@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].id)</td>
+            <td class="sorting_1">@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].nombre)</td>
+            <td>@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].precio)</td>
+            
+             @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].nombre) 
+        </tr>
+    }
+    </tbody>
+    </table>
+    </div>
+        
+    </div>
+</div>
+     
+     
+    <p></p><p></p>
+    <p>
+        @if (ViewBag.estado == 0)
+        {
+            <input type="submit" value="Modificar" class = "redB" />
+        }    
+        
+        <a href="javascript:history.back()">Regresar</a>
+    </p>
+ }
+

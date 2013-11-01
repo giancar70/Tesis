@@ -1,0 +1,53 @@
+﻿@model Cafeteria.Models.Reporte
+
+
+@using (Html.BeginForm("Resultado", "Reportecompra", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.ValidationSummary(false)
+    <fieldset>
+        <div class = "widget" >
+            <div class = "title"><h6>Generar Reporte de Compra</h6></div>
+             
+            <div class="formRow">
+               <span>Sucursal</span>                             
+                
+                <div class = "formRight" >
+                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.idSucursal, Model.listaTipo)</div></div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class="formRow">
+                <label>Fecha Inicio</label>
+                <div class = "formRight"  style="  float:left; margin-left:120px; width: 230px">
+                <input type = "text" id = "fecha1" name = "fecha1" class="datepicker" /></div>
+                 entre Fecha Fin
+                <input type = "text" id = "fecha2" name = "fecha2" class="datepicker" style=" width:90px" />
+                <div class = "clear" ></div>
+            </div>
+
+
+            <div class="formRow">
+               <span>Proveedor</span>                             
+                
+                <div class = "formRight" >
+                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.idproveedor, Model.listaTipoprov)</div></div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class="formRow">
+                <label>Monto desde    </label>
+                <div class = "formRight" style="  float:left; margin-left:117px;  width: 60px" >
+                <input type = "text" id = "monto1" name = "monto1" />  </div>
+                 hasta 
+                <input type = "text" id = "monto2" name = "monto2"  style=" width:60px"/>
+                <div class = "clear" ></div>
+            </div>
+
+        </div>
+    </fieldset>
+    <p>
+        <input type="submit" value="Generar" class = "redB" />
+        <p></p>
+        <a href="javascript:history.back()">Regresar</a> 
+    </p>
+}

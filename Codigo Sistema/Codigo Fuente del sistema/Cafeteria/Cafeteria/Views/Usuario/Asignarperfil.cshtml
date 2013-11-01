@@ -1,0 +1,104 @@
+﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioxSucursalBean
+@{
+    ViewBag.Title = "Asignar Perfil";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("GG2", "Usuario", FormMethod.Post, new { @class = "form" } ))
+{
+    <fieldset>
+        <div class = "widget" >
+            <div class = "title" >
+                <img src="@Url.Content("~/Content/images/icons/dark/list.png")"  class="titleIcon">
+                <h6>@ViewBag.Title</h6>
+            </div>
+            
+             
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.nombres)
+                <div class = "formRight" >
+                    @Html.DisplayFor(model => model.nombres)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.apPat )
+                <div class = "formRight" >
+                    @Html.DisplayFor(model => model.apPat)
+                  
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.apMat )
+                <div class = "formRight" >
+                    @Html.DisplayFor(model => model.apMat)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.nroDocumento )
+                <div class = "formRight" >
+                    @Html.DisplayFor( model => model.nroDocumento )
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+             <div class = "formRow" >
+                @Html.LabelFor(model => model.perfil)
+                <div class = "formRight" >
+                    <table>
+                    @for (int i = 0; i < Model.perfilesDelUsuario.Count; i++)
+                    {
+                        <td>
+                        @Html.DisplayFor(model => model.perfilesDelUsuario[i]) 
+                        </td>                        
+                        <td>
+                         @Html.CheckBoxFor(model => model.estadosDePerfiles[i], true)
+                        </td>
+                    }
+                    </table>  
+                   </div>
+                <div class = "clear" ></div>
+            </div>  
+                    
+               
+
+
+        </div>
+
+        
+    </fieldset>
+    
+    <p>
+            <input class = "redB" type="submit" value="Guardar" /> |
+            <a href="javascript:history.back()">Regresar</a>
+</p>
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.modal').click(function () {
+            $('<div/>').appendTo('body').dialog({
+                close: function (event, ui) {
+                    dialog.remove();
+                },
+                modal: true
+            }).load(this.href, {});
+
+            return false;
+        });
+    });
+</script>
+
+@Html.ActionLink("show modal", "modal", null, new { @class = "modal" })

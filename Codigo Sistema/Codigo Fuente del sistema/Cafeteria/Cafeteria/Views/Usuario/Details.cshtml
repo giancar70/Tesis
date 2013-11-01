@@ -1,0 +1,89 @@
+﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioBean
+
+@{
+    ViewBag.Title = "Detalle del Personal";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+@using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new { @class = "form" } ))
+{
+    <fieldset>
+        <div class = "widget" >
+            <div class = "title" >
+                <img src="@Url.Content("~/Content/images/icons/dark/list.png")"  class="titleIcon">
+                <h6>@ViewBag.Title</h6>
+            </div>
+
+             
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.user_account )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.user_account)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.nombres )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.nombres)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.apPat )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.apPat)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.apMat )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.apMat)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.celular )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.celular)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.nroDocumento )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.nroDocumento)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.direccion )
+                <div class = "formRight" >
+                    @Html.DisplayTextFor(model => model.direccion)
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+        </div>
+        <p>
+            <a href="@Url.Action("Edit", new { id = Model.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar</a> |
+            <a href="javascript:history.back()">Regresar</a>
+        </p>
+    </fieldset>
+}

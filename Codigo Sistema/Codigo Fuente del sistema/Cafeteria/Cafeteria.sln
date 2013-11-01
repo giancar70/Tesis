@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafeteria", "Cafeteria\Cafeteria.csproj", "{86D16FD2-604C-4DAB-B6C1-F16C2FA9EDD5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95} = {DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfReportGenerator", "PdfReportGenerator\PdfReportGenerator.csproj", "{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BDA1ADB9-0FB2-4CFF-AFCE-67F6D3A85951}"
+	ProjectSection(SolutionItems) = preProject
+		PdfReportGenerator\bin\Debug\itextsharp.dll = PdfReportGenerator\bin\Debug\itextsharp.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86D16FD2-604C-4DAB-B6C1-F16C2FA9EDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D16FD2-604C-4DAB-B6C1-F16C2FA9EDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D16FD2-604C-4DAB-B6C1-F16C2FA9EDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D16FD2-604C-4DAB-B6C1-F16C2FA9EDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

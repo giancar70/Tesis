@@ -1,0 +1,84 @@
+﻿@model Cafeteria.Models.Compra.Proveedor.ProveedorBean
+
+@{
+    ViewBag.Title = "Registrar Proveedor";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+@using (Html.BeginForm("Create", "Proveedor", FormMethod.Post, new { @class = "form" }))
+{
+  @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="widget">
+            <div class="title">
+                <h6>Registrar Proveedor</h6>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.razonSocial)<span class="req">*</span>
+                <div class="formRight">
+                    @Html.TextBoxFor(model => model.razonSocial, new { maxlength = "50" })@*@ViewBag.error1*@
+                   @* @Html.ValidationMessageFor(model => model.razonSocial) *@
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.ruc)<span class="req">*</span>
+                <div class="formRight"> @Html.TextBoxFor(model => model.ruc, new { maxlength = "11" })@*@ViewBag.error2*@
+                @*@Html.ValidationMessageFor(model => model.ruc) *@</div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="formRow">@Html.LabelFor(model => model.direccion)<span class="req">*</span>
+                <div class="formRight"> @Html.TextBoxFor(model => model.direccion, new { maxlength = "50" }) 
+                @* @Html.ValidationMessageFor(model => model.direccion)*@</div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.telefono1)
+                 
+                <div class="formRight"> @Html.TextBoxFor(model => model.telefono1, new { maxlength = "9" }) 
+                @*@Html.ValidationMessageFor(model => model.telefono1)*@</div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.telefono2)
+                 
+                <div class="formRight"> @Html.TextBoxFor(model => model.telefono2, new { maxlength = "9" }) 
+               @* @Html.ValidationMessageFor(model => model.telefono2)*@</div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.web)<span class="req">*</span>
+                <div class="formRight"> @Html.TextBoxFor(model => model.web, new { maxlength = "30" })
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.contacto)<span class="req">*</span>
+                <div class="formRight"> @Html.TextBoxFor(model => model.contacto, new { maxlength = "48" }) 
+                @* @Html.ValidationMessageFor(model => model.contacto)*@</div>
+                <div class="clear"></div>
+            </div>
+                
+            <div class="formRow">@Html.LabelFor(model => model.telefonoContacto)
+                <div class="formRight"> @Html.TextBoxFor(model => model.telefonoContacto, new { maxlength = "9" }) 
+                 @*@Html.ValidationMessageFor(model => model.telefono_contacto)*@</div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.emailContacto)<span class="req">*</span>
+                <div class="formRight"> @Html.TextBoxFor(model => model.emailContacto, new { maxlength = "40", placeholder = "Ejm: stardust@stardust.pe" }) 
+                @*@Html.ValidationMessageFor(model => model.email_contacto)*@ </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="formRow">@Html.LabelFor(model => model.Observacion)
+                <div class="formRight"> @Html.TextAreaFor(model => model.Observacion, new { maxlength = "45" }) </div>
+                <div class="clear"></div>
+            </div>            
+            
+        </div>
+    </fieldset>
+
+     <p>
+        <input type="submit" value="Crear" class = "redB" />        
+        <a href="javascript:history.back()">Regresar</a>
+    </p>
+}
+

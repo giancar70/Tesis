@@ -1,0 +1,97 @@
+﻿@model Cafeteria.Models.Compra.Ordencompra.OrdencompraBean
+
+@{
+    ViewBag.Title = "Detalle Orden Compra";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    
+@using (Html.BeginForm("ModificarOrdenC/"+ Model.idOrdenCompra, "OrdenCompra", FormMethod.Post, new { @class = "form" }))
+{
+   
+    
+    <fieldset>
+        <div class="widget">
+            <div class="title">
+                <h6>Detalle de La Orden Compra</h6> @Html.HiddenFor(model => model.idCafeteria)
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.nombreSucursal)
+                <div class=" formRight"> @Html.DisplayFor(model => model.nombreSucursal)  @Html.HiddenFor(model => model.nombreSucursal) </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProveedor)
+                <div class=" formRight"> @Html.DisplayFor(model => model.nombreProveedor)  @Html.HiddenFor(model => model.nombreProveedor) </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.fecha)
+                <div class="formRight"> @Html.DisplayFor(model => model.fecha) @Html.HiddenFor(model => model.fecha) </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="formRow">@Html.LabelFor(model => model.estado)
+                <div class="formRight"> @Html.DisplayFor(model => model.estado)  @Html.HiddenFor(model => model.estado) </div>
+                <div class="clear"></div>
+            </div>
+          
+            
+        </div>
+    </fieldset>
+    
+    
+    <div class="widget">
+
+          <div class="title"><img src="../../Content/images/icons/dark/frames.png" alt="" class="titleIcon" /><h6>Lista de Productos Solicitados</h6></div>
+
+            <table cellpadding="0" cellspacing="0" width="100%" class="sTable">
+
+                <thead>
+                    <tr>
+                        <td>Producto</td>
+                        <td>Cantidad Pedida</td>
+                        <td>Cantidad Entrante</td>
+                        <td>Precio Unitario</td>
+                        <td>Precio Total</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        @for (int i = 0; i < Model.detalle.Count; i++)
+                        {
+                    <tr>       
+                            @Html.HiddenFor(model => model.detalle[i].id)
+                        <td> @Html.DisplayFor(model => model.detalle[i].nombre) @Html.HiddenFor(model => model.detalle[i].nombre) </td>
+                        <td> @Html.DisplayFor(model => model.detalle[i].Cantidad) @Html.HiddenFor(model => model.detalle[i].Cantidad)</td>
+                        <td> @Html.DisplayFor(model => model.detalle[i].Cantidadentrante)  @Html.HiddenFor(model => model.detalle[i].Cantidadentrante)</td>
+                        <td style=" text-align:right"> @Html.DisplayFor(model => model.detalle[i].preciounitario) @Html.HiddenFor(model => model.detalle[i].preciounitario)</td>
+                        <td style=" text-align:right"> @Html.DisplayFor(model => model.detalle[i].precio) @Html.HiddenFor(model => model.detalle[i].precio)</td>
+                      
+                    </tr>       
+                        }
+
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td style=" text-align:right">Monto Total</td>
+                        <td style=" text-align:right" > @Html.DisplayFor(model => model.precioTotal) @Html.HiddenFor(model => model.precioTotal)</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+      </div>
+
+   @* <p>
+        <input type="submit" value="Editar" class = "redB" />
+    </p>
+    *@
+    <p>
+       
+       <a href="javascript:window.history.back();">Regresar</a>
+    </p>
+    
+}

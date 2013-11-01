@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Cafeteria.Models.Administracion.Sucursal.SucursalBean>
+
+@{
+    ViewBag.Title = "Lista de Sucursal";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="wrapper">
+    <div class="widget">
+      <div class="title"><h6>@ViewBag.Title</h6></div>
+      <div class="dataTables_wrapper">
+        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+            <thead>
+                <tr>
+
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:120px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Nombre
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:180px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Direccion
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+
+                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:120px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Telefono
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                          
+                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:90px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Estado
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>                    
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+
+                    </th>
+
+                </tr>
+            </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+                @Html.HiddenFor(modelItem => item.id)
+               <tr class="gradeA odd">
+                    <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.direccion)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.telefono1) - @Html.DisplayFor(modelItem => item.telefono2)
+                    </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.estado)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
+                        @if (item.estado == "Activo")
+                        { 
+                            <a  id = @item.id class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Dar de baja</a>
+                        }
+                        | <a href="@Url.Action("Listaproductos", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Lista de productos </a> 
+                    </td>
+
+               </tr>
+        
+
+        }
+     <div id="dialogEliminar" title="Desea dar de baja a la Sucursal?">
+	    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span> Desea dat de baja a la Sursal</p>
+    </div>
+
+    </tbody>
+    </table>
+    </div>
+        
+    </div>
+</div>
+
+<script type = "text/javascript">
+    var idEliminar = 0;
+    $(".eliminar").click(function () {
+        $('#dialogEliminar').dialog('open');
+        idEliminar = $(this).attr("id");
+        return false;
+    });
+
+    $('#dialogEliminar').dialog({
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        width: 300,
+        modal: true,
+        title: "!Confirmar Dar de baja a la Sucursal",
+        position: "center",
+        buttons: {
+            "Aceptar": function () {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    url: "Sucursal/Delete/" + idEliminar,
+                    success: function (data) {
+                        //oTable.fnDraw(false);
+                        if (data.me == "") {
+                            $(this).dialog("close");
+                            location.reload();
+                        }
+                    }
+                });
+
+            },
+            "Cancelar": function () {
+                $(this).dialog("close");
+                return false;
+            }
+        }
+    });
+
+</script>

@@ -1,0 +1,76 @@
+﻿@model Cafeteria.Models.Administracion.Sucursal.SucursalBean
+
+@{
+    ViewBag.Title = "Editar Sucursal";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Sucursal", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="widget">
+          <div class="title"><h6>Modificar Sucursal</h6></div>
+          
+          <div class="formRow">
+            <span>ID</span>
+            <div class = "formRight" > 
+                @Html.DisplayFor(model => model.id) @Html.HiddenFor(model => model.id)
+            </div><div class="clear"></div>
+          </div>
+
+<div class = "formRow" >
+                @Html.LabelFor( model => model.nombre )
+                <div class = "formRight" >
+                    @Html.TextBoxFor( model => model.nombre )
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.telefono1 )
+                <div class = "formRight" >
+                    @Html.TextBoxFor(model => model.telefono1, new { maxlength = "8" })
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+            <div class = "formRow" >
+                @Html.LabelFor(model => model.telefono2)
+                <div class = "formRight" >
+                    @Html.TextBoxFor(model => model.telefono2, new { maxlength = "8" })
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.direccion )
+                <div class = "formRight" >
+                    @Html.TextBoxFor( model => model.direccion )
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+           <div class="formRow"> @Html.LabelFor(model => model.estado)
+                <div class="formRight"> 
+                                     @Html.RadioButtonFor(model => model.estado, "Activo", true) Activo <br />
+                                     @Html.RadioButtonFor(model => model.estado, "Inactivo", false) Inactivo    
+                                                                                                            
+                </div> 
+                <div class="clear"></div>
+           </div>
+
+        </div>
+        <p>
+            <input type="submit" value="Guardar" class = "redB" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a href="javascript:history.back()">Regresar</a>
+</div>

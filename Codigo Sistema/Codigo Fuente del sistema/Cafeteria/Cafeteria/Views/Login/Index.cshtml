@@ -1,0 +1,53 @@
+﻿@model Cafeteria.Models.Administracion.Login.loginBean
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/login.js")" type="text/javascript"></script>
+
+<div class="loginWrapper">
+    <div class="loginLogo"><img src="@Url.Content("~/Content/images/loginLogo.png")" alt="" /></div>
+
+    <div class="widget">
+        <div class="title"><img src="@Url.Content("~/Content/images/icons/dark/files.png")" alt="" class="titleIcon" />
+            <h6>Panel de Ingreso</h6>
+        </div>
+
+        @Html.ValidationSummary(true)
+        <div id = "control" ></div>
+
+            <fieldset>
+                <div class="form formRow">
+                    @Html.LabelFor(m => m.usuario)
+                    <div class="loginInput">
+                        @Html.TextBoxFor(m => m.usuario, new { @class = "logueo" } )
+                        @Html.ValidationMessageFor(m => m.usuario)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="form formRow">
+                    @Html.LabelFor(m => m.contrasenia)
+                    <div class="loginInput">
+                        @Html.PasswordFor(m => m.contrasenia, new { @class = "logueo" })
+                        @Html.ValidationMessageFor(m => m.contrasenia)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+    
+                <div class="loginControl">
+
+                    <div class="rememberMe">
+                        <input type="checkbox" id="remMe" name="remMe" />
+                        <label for="remMe">Recordarme </label>
+                    </div>
+                    <input type = "submit" id = "loginButton" name = "loginbutton"  value="Log in" class="dredB logMeIn" />
+                    <div class="clear"></div>
+                </div>
+            </fieldset>
+    </div>
+
+</div>

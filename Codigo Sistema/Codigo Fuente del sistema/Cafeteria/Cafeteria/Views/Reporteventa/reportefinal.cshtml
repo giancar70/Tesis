@@ -1,0 +1,86 @@
+﻿@model Cafeteria.Models.Reporte
+
+<br />
+        @*<div id="leftSide" >
+        <div class="logo">
+
+                <img src="C:\Users\TEMP\Desktop\ stardusthotel\Stardust\Stardust\Content\images\logo.png"/>
+
+        </div>*@
+
+<div>  </div>
+<table>
+<tr>
+   <td align="left"> Cafeteria  </td>
+   <td align="right"> Fecha y Hora:  </td>
+</tr>
+<tr><td></td><td align="right"> @DateTime.Now  </td></tr>
+ </table>
+ <div>  </div>
+ <div>    </div>
+<div>    </div>
+<div>    </div>
+<div>    </div>
+<div  align="center">
+    <h2> Reporte de Compras  </h2>
+    Desde: @Model.fecha1 hasta @Model.fecha2
+</div>
+
+<div>    </div>
+<div>    </div>
+
+<table cellpadding="3" cellspacing="3">
+    <tr border="1" bgcolor="#777777" color="#ffffff">
+        <td width="35%" align="center">
+            Sucursal
+        </td>
+        <td width="30%" align="center">
+           Fecha de Venta
+        </td>
+        <td width="20%" align="center">
+            Monto de la venta
+        </td>
+    </tr>
+    @{
+        var OddColor = "#DDEEEE";
+        var evenColor = "#EEFFFF";
+        var Odd = OddColor;
+    }
+    
+    
+    @for (int i = 0; i < Model.listaventas.Count; i++)
+    {
+
+        if (Model.listaventas[i][3].CompareTo("activo") == 0)
+        {
+            
+           if (Model.cantidad[i] ==1) { 
+                <tr border="1" bgcolor="@Odd">
+                    <td> Sucursal @Model.listaventas[i][0]
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            }
+              <tr border="1" bgcolor="@Odd">
+
+            <td></td>
+            @for (int j = 1; j < Model.listaventas[i].Count - 1; j++)
+            {
+                <td>@Model.listaventas[i][j]
+                </td>
+             }
+            </tr>
+
+            if (Odd == OddColor)
+            {
+                Odd = evenColor;
+            }
+            else
+            {
+                Odd = OddColor;
+            }
+        }
+    }
+</table>

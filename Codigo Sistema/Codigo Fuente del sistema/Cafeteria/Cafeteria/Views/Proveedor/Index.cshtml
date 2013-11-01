@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Cafeteria.Models.Compra.Proveedor.ProveedorBean>
+
+<h2>Lista de Proveedores</h2>
+
+<p></p><p></p>
+
+<div class="wrapper">
+    <div class="widget">
+      <div class="title"><h6>Lista de Productos</h6></div>
+      <div class="dataTables_wrapper">
+        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+            <thead>
+                <tr>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:80px;" >
+                        <div class="DataTables_sort_wrapper">
+                        ID
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Razon Social
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:120px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Ruc
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Estado
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+
+                    </th>
+                </tr>
+            </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        if (item.estado == "ACTIVO")
+        {
+           <tr class="gradeA odd">
+                <td>@Html.DisplayFor(modelItem => item.id)</td>
+                <td>@Html.DisplayFor(modelItem => item.razonSocial)</td>
+                <td>@Html.DisplayFor(modelItem => item.ruc)</td>
+                <td>@Html.DisplayFor(modelItem => item.estado)</td>
+                <td>
+                  <a href="@Url.Action("Details", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Detalle </a> | 
+                  <a href="@Url.Action("Edit", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
+                         
+                  @if(item.estado=="ACTIVO"){
+                        <a  ID = @item.id class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
+                        <a href="@Url.Action("ListarIngredientes", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver Ingredientes </a>    
+                  }
+
+                </td>
+           </tr>
+        }
+        else
+        {
+            @Html.HiddenFor(modelItem => item.id)
+            @Html.HiddenFor(modelItem => item.razonSocial)
+            @Html.HiddenFor(modelItem => item.ruc)
+            @Html.HiddenFor(modelItem => item.estado)
+        }
+    }
+
+    <div id="dialogEliminar" title="Desea Eliminar el Producto?">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    El proveedor que UD. Elimine ya no podra ser recuperado</p>
+    </div>
+
+
+    </tbody>
+</table>
+      </div>
+        
+    </div>
+    </div>
+
+
+<script type = "text/javascript">
+    var idEliminar = 0;
+    $(".eliminar").click(function () {
+        //Jp++ GPL version xD
+        $('#dialogEliminar').dialog('open');
+        idEliminar = $(this).attr("id");
+        return false;
+    });
+
+    $('#dialogEliminar').dialog({
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        width: 300,
+        modal: true,
+        title: "!Confirmar Eliminacion de Proveedor",
+        position: "center",
+        buttons: {
+            "Aceptar": function () {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    url: "Proveedor/Delete/" + idEliminar,
+                    success: function (data) {
+                        //oTable.fnDraw(false);
+                        if (data.me == "") {
+                            $(this).dialog("close");
+                            location.reload();
+                        }
+                    }
+                });
+
+            },
+            "Cancelar": function () {
+                $(this).dialog("close");
+                return false;
+            }
+        }
+    });
+
+</script>

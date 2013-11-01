@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Cafeteria.Models.Administracion.Sucursal.SucursalBean>
+
+@{
+    ViewBag.Title = "Lista de Sucursal";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p></p><p></p>
+
+<div class="wrapper">
+    <div class="widget">
+      <div class="title"><h6>@ViewBag.Title</h6></div>
+      <div class="dataTables_wrapper">
+        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+            <thead>
+                <tr>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Nombre
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Direccion
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+
+                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                        <div class="DataTables_sort_wrapper">
+                        Telefono
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                        
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                       <div class="DataTables_sort_wrapper">
+                        Registrar
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                    </th>
+
+                </tr>
+            </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+               <tr class="gradeA odd">
+                    <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.direccion)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.telefono1) - @Html.DisplayFor(modelItem => item.telefono2)
+                    </td>
+                    <td>
+
+                           <a href="@Url.Action("Registrar", new { id = item.id })"><img src="../../Content/images/icons/color/notebook.png", alt="Edit" />Por Proveedores </a> 
+                            <a href="@Url.Action("Registrar", new { id = item.id })"><img src="../../Content/images/icons/color/notebook.png", alt="Edit" />Por Productos </a> 
+
+                    </td>
+
+               </tr>
+        
+
+        }
+
+    </tbody>
+    </table>
+    </div>
+        
+    </div>
+</div>

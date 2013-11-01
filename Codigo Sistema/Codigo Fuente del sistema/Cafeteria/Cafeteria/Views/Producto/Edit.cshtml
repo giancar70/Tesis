@@ -1,0 +1,64 @@
+﻿@model Cafeteria.Models.Venta.Producto.ProductoBean
+
+
+<h2></h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("Edit", "Producto", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="widget">
+          <div class="title"><h6>Modificar Producto</h6></div>
+          
+          <div class="formRow">
+            <span>ID</span>
+            <div class = "formRight" > 
+                @Html.DisplayFor(model => model.id) @Html.HiddenFor(model => model.id)
+            </div><div class="clear"></div>
+          </div>
+
+          <div class="formRow">
+            <span>Nombre</span>
+            <div class = "formRight" > 
+                @Html.TextBoxFor(model => model.nombre, new { maxlength = "40", placeholder = "Maximo 40 caracteres aqui" })
+                @Html.ValidationMessageFor(model => model.nombre)
+            </div><div class="clear"></div>
+          </div>
+
+          <div class="formRow">
+               <span>Tipo de Producto</span>                             
+                
+                <div class = "formRight" >
+                <div class = "selector">@Html.DropDownListFor(model => model.idTipo, Model.listaTipo)</div></div>
+                <div class = "clear" ></div>
+            </div>
+
+          <div class="formRow">
+            <span>Descripcion</span>
+            <div class="formRight">
+                @Html.TextAreaFor(model => model.descripcion, new { maxlength = "200", placeholder = "Maximo 200 caracteres aqui" }) 
+            </div><div class="clear"></div>
+           </div>
+
+           <div class="formRow"> @Html.LabelFor(model => model.estado)
+                <div class="formRight"> 
+                                     @Html.RadioButtonFor(model => model.estado, "ACTIVO", true) Activo <br />
+                                     @Html.RadioButtonFor(model => model.estado, "INACTIVO", false) Inactivo    
+                                                                                                            
+                </div> 
+                <div class="clear"></div>
+           </div>
+
+        </div>
+        <p>
+            <input type="submit" value="Guardar" class = "redB" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a href="javascript:history.back()">Regresar</a>
+</div>

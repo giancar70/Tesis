@@ -1,0 +1,119 @@
+﻿@model Cafeteria.Models.Venta.Producto.ProductoxIngredienteBean
+
+@{
+    ViewBag.Title = "Añadir Ingredientes";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    
+  @using (Html.BeginForm("AñadirIngredientes", "Producto", FormMethod.Post, new { @class = "form", id = "validate" }))
+  {
+    
+    <fieldset>
+        <div class="widget">
+            <div class="title">
+                <h6>@ViewBag.Title</h6>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.idProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.idProducto)  </div>@Html.HiddenFor(model => model.idProducto) 
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombreProducto)  </div>@Html.HiddenFor(model => model.nombreProducto) 
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.tipo)
+                <div class=" formRight">  @Html.DisplayFor(model => model.tipo)  </div>@Html.HiddenFor(model => model.tipo) 
+                <div class="clear"></div>
+            </div>
+            
+        </div>
+    </fieldset>
+    
+      for (int i = 0; i < Model.listaIngredientes.Count; i++)
+      {
+                    @Html.HiddenFor(model => model.listaIngredientes[i].id)  
+                
+      }
+    <p></p>
+      
+      <div class="wrapper">
+    <div class="widget">
+      <div class="title">
+      <h6>Lista de Ingredientes</h6>
+      </div>
+      
+      <div class="dataTables_wrapper">
+            
+            <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+    <thead>
+        <tr>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:150px;" >
+                <div class="DataTables_sort_wrapper">
+                IdIngrediente
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+             <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Ingrediente
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Cantidad
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+             <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Unidad
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+
+        </tr>
+    </thead>
+
+    <tbody>
+             @for (int i = 0; i < Model.listaIngredientes.Count; i++)
+             {
+                 if (!Model.listaIngredientes[i].estadod_disponible)
+                 {  
+                    <tr class="gradeA odd">       
+                
+                        <td class="formRow"> @Html.DisplayFor(model => model.listaIngredientes[i].id) </td>
+                        <td class="formRow"> @Html.DisplayFor(model => model.listaIngredientes[i].nombre) </td>
+                        <td class="formRow"> 
+                            @Html.TextBoxFor(model => model.listaIngredientes[i].cantidad, new { maxlength = "3", placeholder = "Solo números" })
+                            @Html.ValidationMessageFor(model => model.listaIngredientes[i].cantidad)
+                        </td>
+                        <td class="formRow"> 
+                            @Html.TextBoxFor(model => model.listaIngredientes[i].medida)
+                        </td>
+                    </tr>
+                 }
+                 else
+                 {
+                     @Html.HiddenFor(model => model.listaIngredientes[i].nombre) 
+                     @Html.HiddenFor(model => model.listaIngredientes[i].cantidad)         
+                     @Html.HiddenFor(model => model.listaIngredientes[i].medida)
+                 }
+             }
+    </tbody>
+    </table>
+    </div> 
+          </div>
+</div>
+
+        <p>
+            <input type="submit" value="Aceptar" class = "redB" />
+
+        </p>    
+        
+       <a href="javascript:history.back()">Regresar</a>
+  }
+
+

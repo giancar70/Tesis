@@ -1,0 +1,67 @@
+﻿@model Cafeteria.Models.Reporte
+
+<br />
+        @*<div id="leftSide" >
+        <div class="logo">
+
+                <img src="C:\Users\TEMP\Desktop\ stardusthotel\Stardust\Stardust\Content\images\logo.png"/>
+
+        </div>*@
+
+<div>  </div>
+<table>
+<tr>
+   <td align="left"> Stardust  </td>
+   <td align="right"> Fecha y Hora Actual:  </td>
+</tr>
+<tr><td></td><td align="right"> @DateTime.Now  </td></tr>
+ </table>
+ <div>  </div>
+ <div>    </div>
+<div>    </div>
+<div>    </div>
+<div>    </div>
+<div  align="center"><h2>
+    Reporte de Órdenes de Compra
+</h2></div>
+<div>    </div>
+<div>    </div>
+
+<table cellpadding="3" cellspacing="3">
+    <tr border="1" bgcolor="#777777" color="#ffffff">
+        <td width="20%" align="center">
+            Fecha de Emisión
+        </td>
+        <td width="50%" align="center">
+            Estado
+        </td>
+        <td width="30%" align="center">
+            Monto
+        </td>
+    </tr>
+    @{
+        var OddColor = "#DDEEEE";
+        var evenColor = "#EEFFFF";
+        var Odd = OddColor;
+    }
+    @for(int i=0; i<Model.listaalmacen.Count;i++)
+    {
+        <tr border="1" bgcolor="@Odd">
+            <td>@Model.listaalmacen[i][0]
+            </td>
+            <td>@Model.listaalmacen[i][1]
+            </td>
+            <td>@Model.listaalmacen[i][2]
+            </td>
+        </tr>
+        if (Odd == OddColor)
+        {
+            Odd = evenColor;
+        }
+        else
+        {
+            Odd = OddColor;
+        }
+
+    }
+</table>

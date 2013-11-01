@@ -1,0 +1,93 @@
+﻿@model Cafeteria.Models.Compra.Ordencompra.OrdencompraBean
+
+@{
+    ViewBag.Title = "Confirmar Orden de Compra";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    
+@using (Html.BeginForm("GuardarestadoOrdenC", "OrdenCompra", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.HiddenFor(model => model.idOrdenCompra)
+    <fieldset>
+        <div class="widget">
+            <div class="title">
+                <h6>@ViewBag.Title</h6>
+            </div>
+             <div class="formRow"> @Html.LabelFor(model => model.nombreSucursal)
+                <div class=" formRight"> @Html.DisplayFor(model => model.nombreSucursal)  </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProveedor)
+                <div class=" formRight"> @Html.DisplayFor(model => model.nombreProveedor)  </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">@Html.LabelFor(model => model.fecha)
+                <div class="formRight"> @Html.DisplayFor(model => model.fecha) </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="formRow">@Html.LabelFor(model => model.estado)
+                <div class="formRight"> 
+                                     @Html.RadioButtonFor(model => model.estado, "Registrado", true) Aceptado <br />
+                                     @Html.RadioButtonFor(model => model.estado, "Cancelado", false) Anulado    
+                                                                                                            
+                </div> 
+                <div class="clear"></div>
+            </div>
+
+            
+            
+        </div>
+    </fieldset>
+    
+    
+    <div class="widget">
+
+          <div class="title"><img src= "../../Content/images/icons/dark/frames.png" alt="" class="titleIcon" /><h6>Lista de Productos</h6></div>
+
+            <table cellpadding="0" cellspacing="0" width="100%" class="sTable">
+
+                <thead>
+                    <tr>
+                        <td>Producto</td>
+                        <td>Cantidad</td>
+                        <td>Precio Unitario</td>
+                        <td>Precio Total</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        @for (int i = 0; i < Model.detalle.Count; i++)
+                        {
+                    <tr>       
+               
+                        <td> @Html.DisplayFor(model => model.detalle[i].nombre, new { @readonly = "readonly" }) </td>
+                        <td> @Html.DisplayFor(model => model.detalle[i].Cantidad, new { @readonly = "readonly" })</td>
+                        <td> @Html.DisplayFor(model => model.detalle[i].preciounitario, new { @readonly = "readonly" })</td>
+                        <td> @Html.DisplayFor(model => model.detalle[i].precio, new { @readonly = "readonly" })</td>
+                      
+                    </tr>       
+                        }
+                    
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td>Monto Total</td>
+                        <td > @Html.DisplayFor(model => model.precioTotal, new { @readonly = "readonly" })</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+      </div>
+    
+     <p>
+        <input type="submit" value="Guardar" class = "redB" />
+        
+         <a href="javascript:window.history.back();">Regresar</a>
+    </p>
+    
+}

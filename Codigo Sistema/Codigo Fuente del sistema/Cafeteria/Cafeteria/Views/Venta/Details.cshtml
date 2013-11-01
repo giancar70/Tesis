@@ -1,0 +1,113 @@
+﻿@model Cafeteria.Models.Venta.Venta.VentaBean
+
+@{
+    ViewBag.Title = "Detalles de venta";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("Registrar", "Venta", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.ValidationSummary(false)
+    <fieldset>
+        <div class = "widget" >
+            <div class = "title"><h6>Detalle de Venta</h6></div>
+
+          <div class="formRow">
+               <span>Sucursal</span>                             
+                
+                <div class = "formRight" >                         
+                    @Html.DisplayFor(model => model.nombresucursal) 
+                </div>      
+                <div class = "clear" ></div>
+            </div>
+
+          <div class="formRow">
+               <span>Fecha Registro</span>                             
+                
+                <div class = "formRight" > 
+                    @Html.DisplayFor(model => model.fecharegistro)  
+                </div>      
+                <div class = "clear" ></div>
+          </div>
+          <div class="formRow">
+               <span>Nombre persona</span>                             
+                
+                <div class = "formRight" > 
+                    @Html.DisplayFor(model => model.nombrepersona)  
+                </div>       
+                <div class = "clear" ></div>
+          </div>
+          <div class="formRow">
+               <span>Dni Persona</span>                             
+                
+                <div class = "formRight" > 
+                    @Html.DisplayFor(model => model.dnipersona) 
+                </div>      
+                <div class = "clear" ></div>
+          </div>
+        </div>
+    </fieldset>
+     
+    
+        <div class="widget">
+
+          <div class="title"><img src="../../Content/images/icons/dark/frames.png" alt="" class="titleIcon" /><h6>Detalle de la venta </h6></div>
+
+            <table cellpadding="0" cellspacing="0" width="100%" class="sTable">
+
+                <thead>
+                    <tr>
+                        <td>nombre</td>
+                        <td>Tipo</td>
+                        <td> Cantidad solicitada </td>
+                        <td>Precio unitario</td>
+                        <td>Subtotal</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        @for (int i = 0; i < Model.listaproductos.Count; i++)
+                        {
+                            if (Model.listaproductos[i].cantidadsolicitada > 0)
+                            {
+                    <tr>       
+
+                        <td> @Html.DisplayFor(model => model.listaproductos[i].nombre) </td>
+                        <td> @Html.DisplayFor(model => model.listaproductos[i].nombreTipo) </td>
+                        <td> @Html.DisplayFor(model => model.listaproductos[i].cantidadsolicitada)  </td>
+                        <td style=" text-align:right"> @Html.DisplayFor(model => model.listaproductos[i].preciouniario)</td>
+                        <td style=" text-align:right"> @Html.DisplayFor(model => model.listaproductos[i].subtotal) </td>
+                      
+                    </tr> 
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(model => model.listaproductos[i].nombre)  
+                                @Html.HiddenFor(model => model.listaproductos[i].nombreTipo) 
+                                @Html.HiddenFor(model => model.listaproductos[i].preciouniario)
+                                @Html.HiddenFor(model => model.listaproductos[i].preciosubtotal)
+                                @Html.HiddenFor(model => model.listaproductos[i].cantidadsolicitada)
+                            }
+                        }
+
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td style=" text-align:right">Monto Total</td>
+                        <td style=" text-align:right" > @Html.DisplayFor(model => model.totalventa) </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+      </div>
+    
+    
+    
+    <p>
+        <a href="javascript:history.back()">Regresar</a> 
+    </p>
+}
